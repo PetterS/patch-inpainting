@@ -10,7 +10,7 @@ if nargin < 3
     verbose = true;
 end
 if nargin < 4
-    sigma = 0.25;
+    sigma = 0.1;
 end
 
 if ~exist('CSH_nn.m','file')
@@ -18,6 +18,10 @@ if ~exist('CSH_nn.m','file')
 end
 
 
+LAB = @(I) applycform(I,makecform('srgb2lab'));
+RGB = @(I) applycform(I,makecform('lab2srgb'));
+
+Aorg = LAB(Aorg);
 
 width = 8;
 csh_iterations = 5;
@@ -63,7 +67,7 @@ for logscale = startscale:0
     for iter = 1:iterations
         if verbose
             fprintf('  Iteration %2d/%2d',iter,iterations);
-            imshow(A);
+            imshow(RGB(A));
             pause(0.001)
         end
         
@@ -138,3 +142,5 @@ for logscale = startscale:0
         A(~M3) = Adata(~M3);
     end
 end
+
+A = RGB(A);
