@@ -1,3 +1,5 @@
+![Example output](cow-out.png)
+
 The source code is written by Petter Strandmark and may be freely distributed.
 
 This inpainting tool uses Coherency Sensitive Hashing.
